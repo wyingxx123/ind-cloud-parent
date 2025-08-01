@@ -162,11 +162,7 @@
     </dependencyManagement>
 
     <modules>
-        <module>ind-common</module>
         <module>ind-gateway</module>
-        <module>ind-api</module>
-        <module>ind-auth</module>
-        <module>ind-system</module>
     </modules>
 
 </project>
