@@ -163,6 +163,7 @@
 
     <modules>
         <module>ind-gateway</module>
+        <module>ind-auth</module>
     </modules>
 
 </project>
