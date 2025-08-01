@@ -164,6 +164,8 @@
     <modules>
         <module>ind-gateway</module>
         <module>ind-auth</module>
+        <module>ind-common</module>
+        <module>ind-api</module>
     </modules>
 
 </project>

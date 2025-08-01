@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.LoadExcelInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.LoadExcelInfoEntity">
+        <result column="template_no" property="templateNo" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="status" property="status" />
+        <result column="name" property="name" />
+        <result column="format_dict_type" property="formatDictType" />
+        <result column="data_dict_type" property="dataDictType" />
+        <result column="para_dict_type" property="paraDictType" />
+        <result column="resource" property="resource" />
+        <result column="parament" property="parament" />
+        <result column="owner" property="owner" />
+        <result column="factory_no" property="factoryNo" />
+        <result column="line_no" property="lineNo" />
+        <result column="stastion_no" property="stastionNo" />
+        <result column="team_no" property="teamNo" />
+        <result column="post_no" property="postNo" />
+        <result column="user_name" property="userName" />
+        <result column="description" property="description" />
+        <result column="note" property="note" />
+        <result column="operator" property="operator" />
+        <result column="reg_date" property="regDate" />
+        <result column="op_date" property="opDate" />
+        <result column="op_time" property="opTime" />
+        <result column="server_id" property="serverId" />
+        <result column="data_src_cd" property="dataSrcCd" />
+        <result column="del_flg" property="delFlg" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        template_no, merchant_id, status, name, format_dict_type, data_dict_type, para_dict_type, resource, parament, owner, factory_no, line_no, stastion_no, team_no, post_no, user_name, description, note, operator, reg_date, op_date, op_time, server_id, data_src_cd, del_flg
+    </sql>
+    <update id="annualBusinessPlanFlash">
+        REPLACE data_agg.app_score_data_info(merchant_id,app_id,score_id,attr_id,object_id,score_date,type,sort_no,status,score_name,object_no,object_name,score_value,operator,reg_date,op_date,description,note)
+        SELECT
+            score.merchant_id
+             , score.app_id
+             , score.score_id
+             , attr.attr_id
+             , "${colId}" AS object_id
+             , input.data_date AS score_date
+             , "00" AS type
+             , attr.sort_no AS sort_no
+             , "0" AS status
+             , score.score_name
+             , attr.attr_no AS object_no
+             , attr.attr_label AS object_name
+             ,CASE WHEN input.${colId} = "" THEN NULL ELSE CAST(input.${colId} AS DECIMAL(10,4)) END AS score_value
+             , input.import_by AS operator
+             , input.import_date AS reg_date
+             , current_date() AS op_date
+             ,attr.description as description
+             ,attr.note as note
+        FROM cache_db.${tableName} input
+        LEFT OUTER JOIN data_agg.app_score_info score
+        ON score.merchant_id = #{merchantId}
+            AND score.app_id = input.app_id
+            AND score.score_id = input.excel_tmpl_no
+            AND score.del_flg = "0"
+            LEFT OUTER JOIN data_agg.app_conf_info conf
+            ON conf.app_id = score.app_id
+            AND conf.merchant_id = score.merchant_id
+            AND conf.topic_no = score.conf_id
+            AND conf.del_flg = "0"
+            LEFT OUTER JOIN data_agg.app_conf_attr_info attr
+            ON attr.app_id = conf.app_id
+            AND attr.merchant_id = conf.merchant_id
+            AND attr.conf_id = conf.conf_id
+            AND attr.attr_label = input.type_name
+        WHERE 1=1
+          AND input.merchant_id = #{merchantId}
+          AND input.app_id = #{appId}
+          AND input.import_date = #{importDate}
+          AND score.score_name = #{scoreName}
+          AND attr.attr_id IS NOT NULL
+
+    </update>
+
+    <update id="convCustProdAlias">
+        update c_erp_stock_day_info s
+
+            INNER JOIN c_prd_product_basic_info b ON s.product_alias=b.product_alias and b.merchant_id=s.merchant_id
+
+            set  s.product_no=b.product_no , s.product_name=b.product_name
+        where s.merchant_id=#{merchantId}
+
+        <if test="importDate !=null and importDate !=''">
+            and s.import_date=#{importDate}
+        </if>
+        <if test="templateNo !=null and templateNo !=''">
+            and s.excel_tmpl_no=#{templateNo}
+        </if>
+    </update>
+
+    <update id="convProdProdNo">
+        update c_erp_stock_day_info s
+
+        INNER JOIN c_prd_product_basic_info b ON s.product_no=b.product_no and b.merchant_id=s.merchant_id
+
+        set  s.product_alias=b.product_alias
+        where s.merchant_id=#{merchantId}
+
+        <if test="importDate !=null and importDate !=''">
+            and s.import_date=#{importDate}
+        </if>
+        <if test="templateNo !=null and templateNo !=''">
+            and s.excel_tmpl_no=#{templateNo}
+        </if>
+    </update>
+</mapper>

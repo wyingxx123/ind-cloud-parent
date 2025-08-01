@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.dataapi.DataApiParaInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.dataapi.DataApiParaInfoEntity">
+        <result column="service_id" property="serviceId" />
+        <result column="app_id" property="appId" />
+        <result column="para_group_no" property="paraGroupNo" />
+        <result column="para_id" property="paraId" />
+        <result column="para_type" property="paraType" />
+        <result column="seq" property="seq" />
+        <result column="para_status" property="paraStatus" />
+        <result column="para_name" property="paraName" />
+        <result column="para_resource" property="paraResource" />
+        <result column="para_values" property="paraValues" />
+        <result column="description" property="description" />
+        <result column="note" property="note" />
+        <result column="operator" property="operator" />
+        <result column="reg_date" property="regDate" />
+        <result column="op_date" property="opDate" />
+        <result column="op_time" property="opTime" />
+        <result column="server_id" property="serverId" />
+        <result column="data_src_cd" property="dataSrcCd" />
+        <result column="del_flg" property="delFlg" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        service_id, app_id, para_group_no, para_id, para_type, seq, para_status, para_name, para_resource, para_values, description, note, operator, reg_date, op_date, op_time, server_id, data_src_cd, del_flg
+    </sql>
+
+</mapper>

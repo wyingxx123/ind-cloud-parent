@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.dataapi.DataApiColumnInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.dataapi.DataApiColumnInfoEntity">
+        <id column="column_no" property="columnNo" />
+        <result column="app_id" property="appId" />
+        <result column="column_desc" property="columnDesc" />
+        <result column="create_time" property="createTime" />
+        <result column="create_by" property="createBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="update_by" property="updateBy" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        column_no, app_id, column_desc, create_time, create_by, update_time, update_by
+    </sql>
+    <select id="getApiEngineInfo" resultType="com.dfc.ind.entity.dataapi.vo.ApiSqlInfoVo">
+        SELECT d.service_id as serviceId,d.app_id,e.engine_resource FROM data_api_info d
+        INNER JOIN data_api_engine_info e ON CONCAT(d.api_id,':',d.api_version)=e.engine_no and d.app_id=e.app_id
+        where e.engine_type='SQL-QUERY' and d.service_status='1' and e.engine_status='1' and d.column_status !='1'
+        <if test="appId != null and appId !=''">
+            and d.app_id =#{appId}
+        </if>
+    </select>
+    <select id="getColumnData" resultType="com.dfc.ind.entity.dataapi.vo.ApiColumnVo">
+        select DISTINCT column_name ,  COLUMN_COMMENT as columnDesc
+        from information_schema.columns where table_name in
+        <foreach item="item" index="index" collection="set" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        GROUP BY column_name,COLUMN_COMMENT
+    </select>
+    <update id="updateApiColumnStatus" >
+       update data_api_info set column_status='1'
+        where app_id=#{appId}
+           and service_id in
+     <foreach item="item" index="index" collection="list" open="(" close=")" separator=",">
+        #{item}
+    </foreach>
+    </update>
+    <update id="saveColumnInfo">
+        REPLACE INTO `data_api`.`data_api_column_info`(`column_no`, `app_id`, `column_desc`, `create_time`, `create_by`) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.columnNo},#{item.appId},#{item.columnDesc}, #{item.createTime},#{item.createBy}
+            )
+        </foreach>
+    </update>
+    <select id="pageList" resultMap="BaseResultMap">
+        SELECT t.* FROM data_api.data_api_column_info  t
+
+        where  not EXISTS (SELECT 1  from `ind-cloud-api`.secu_std_item_lvl_strategy  s where t.column_no=s.std_item_id and s.del_flag ='0')
+        <if test="entity.columnNo !=null and entity.columnNo!=''">
+            t.column_no like concat(#{entity.columnNo},"%")
+        </if>
+        <if test="entity.columnDesc !=null and entity.columnDesc!=''">
+            t.column_desc like concat(#{entity.columnDesc},"%")
+        </if>
+    </select>
+</mapper>
