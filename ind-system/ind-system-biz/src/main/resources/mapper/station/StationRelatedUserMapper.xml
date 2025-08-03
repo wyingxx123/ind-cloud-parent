@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.station.StationRelatedUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.station.StationRelatedUserEntity">
+        <id column="station_no" property="stationNo"/>
+        <result column="station_name" property="stationName"/>
+        <result column="station_type" property="stationType"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+        <result column="states" property="states"/>
+        <result column="code_no" property="codeNo"/>
+        <result column="code_no" property="codeUrl"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="merchant_id" property="merchantId"/>
+        <result column="merchant_name" property="merchantName"/>
+        <result column="data_src" property="dataSrc"/>
+        <result column="del_flg" property="delFlg"/>
+        <result column="address" property="address" />
+        <result column="longitude" property="longitude" />
+        <result column="latitude" property="latitude" />
+        <result column="effective_range" property="effectiveRange" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        station_no,station_name,station_type,user_id,role_id,states,code_no,code_url,create_time,create_by,update_time,update_by,merchant_id,merchant_name,data_src, address, longitude, latitude, effective_range
+    </sql>
+
+    <select id="getByIds" parameterType="java.util.List" resultType="com.dfc.ind.entity.station.StationRelatedUserEntity">
+        select * from c_station_related_user
+        where station_no in
+        <foreach item="item" index="index" collection="list" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id="update" parameterType="com.dfc.ind.entity.station.StationRelatedUserEntity">
+        update c_station_related_user
+        <set>
+            station_name = #{stationName},
+            station_type = #{stationType},
+            user_id = #{userId},
+            role_id = #{roleId},
+            states = #{states},
+            merchant_id = #{merchantId},
+            address = #{address},
+            longitude = #{longitude},
+            latitude = #{latitude},
+            effective_range = #{effectiveRange},
+            update_by = #{updateBy},
+            update_time = #{updateTime}
+        </set>
+        WHERE station_no = #{stationNo}
+    </update>
+</mapper>

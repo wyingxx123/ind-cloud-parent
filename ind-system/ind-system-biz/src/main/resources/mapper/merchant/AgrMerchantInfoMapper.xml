@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.merchant.AgrMerchantInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.merchant.AgrMerchantInfoEntity">
+        <id column="merchant_id" property="merchantId"/>
+        <result column="auth_id" property="authId"/>
+        <result column="merchant_name" property="merchantName"/>
+        <result column="credentials_no" property="credentialsNo"/>
+        <result column="credentials_address" property="credentialsAddress"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="email" property="email"/>
+        <result column="telephone" property="telephone"/>
+        <result column="address" property="address"/>
+        <result column="status" property="status"/>
+        <result column="approval_status" property="approvalStatus"/>
+        <result column="del_flg" property="delFlg"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="remark" property="remark"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="is_ranking" property="isRanking"/>
+        <result column="server_id" property="serverId"/>
+        <result column="empower_json" property="empowerJson"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="mechanism" property="mechanism"/>
+        <result column="serial_number" property="serialNumber"/>
+        <result column="id_card" property="idCard"/>
+        <result column="id_cardtails" property="idCardtails"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        merchant_id, auth_id, merchant_name, credentials_no, credentials_address, legal_name, email, telephone, address,
+        status, approval_status, del_flg, create_time, create_by, remark, update_time, update_by, is_ranking,server_id,empower_json,dept_id,mechanism,serial_number,id_card,id_cardtails
+    </sql>
+
+    <select id="getMerchantInfo" parameterType="Long" resultMap="BaseResultMap">
+        select
+        m.*
+        from
+        c_agr_merchant_info m
+        left join c_eve_auth_info a on a.auth_id = m.auth_id
+        where m.del_flg = '0' and a.user_id = #{userId}
+    </select>
+
+    <delete id="removeMerchantById" parameterType="Long">
+        delete a,m,r
+        from c_agr_merchant_info as m
+        left join c_eve_auth_info as a on a.auth_id = m.auth_id
+        left join sys_user_role as r on r.user_id = a.user_id
+        where m.merchant_id = #{merchantId}
+    </delete>
+</mapper>

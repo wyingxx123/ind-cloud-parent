@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.merchant.EveAuthInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.merchant.EveAuthInfoEntity">
+        <id column="auth_id" property="authId"/>
+        <result column="user_id" property="userId"/>
+        <result column="auth_type" property="authType"/>
+        <result column="apply_type" property="applyType"/>
+        <result column="legal_name" property="legalName"/>
+        <result column="credentials_no" property="credentialsNo"/>
+        <result column="credentials_address" property="credentialsAddress"/>
+        <result column="approval_status" property="approvalStatus"/>
+        <result column="email" property="email"/>
+        <result column="telephone" property="telephone"/>
+        <result column="address" property="address"/>
+        <result column="create_time" property="createTime"/>
+        <result column="create_by" property="createBy"/>
+        <result column="remark" property="remark"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="del_flg" property="delFlg"/>
+        <result column="mechanism" property="mechanism"/>
+        <result column="serial_number" property="serialNumber"/>
+        <result column="id_card" property="idCard"/>
+        <result column="id_cardtails" property="idCardtails"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        auth_id, user_id, auth_type, apply_type, legal_name, credentials_no, credentials_address,
+        approval_status, del_flg, email, telephone, address, create_time, create_by, remark, update_time, update_by,mechanism,serial_number,id_card,id_cardtails
+    </sql>
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.sys.SysUserActiveMapper">
+
+    <!--响应类型-->
+    <resultMap id="SysUserResultMap" type="com.dfc.ind.entity.vo.SysUserActiveVo">
+        <result column="merchant_id" property="merchantId"/>
+        <result column="merchant_name" property="merchantName"/>
+        <result column="status" property="status"/>
+        <result column="mechanism" property="mechanism"/>
+        <result column="operNum" property="operNum"/>
+        <result column="userNum" property="userNum"/>
+        <result column="operUserNum" property="operUserNum"/>
+    </resultMap>
+
+    <!--根据时间查询所有商户的用户活跃数-->
+    <select id="selectStatisticsUserActive" parameterType="com.dfc.ind.entity.vo.SysUserActiveVo" resultMap="SysUserResultMap">
+        SELECT cami.merchant_name,cami.mechanism,cami.status,cami.merchant_id,cami.credentials_no,COUNT(sl.user_name) AS operNum,COUNT(DISTINCT su.user_id) AS userNum,COUNT(DISTINCT sl.user_name) AS operUserNum
+        FROM sys_user AS su
+        LEFT JOIN sys_logininfor AS sl
+        ON sl.user_name=su.user_name
+        <if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''"> AND access_time BETWEEN #{startTime} AND #{endTime}</if>
+        LEFT JOIN c_agr_merchant_info cami ON su.merchant_id=cami.merchant_id
+        <where>
+            su.merchant_id IN (
+                SELECT su.merchant_id FROM sys_user su RIGHT JOIN sys_logininfor sl ON sl.user_name=su.user_name
+                <if test="startTime!=null and startTime!='' and endTime!=null and endTime!=''"> AND access_time BETWEEN #{startTime} AND #{endTime}</if>
+            )
+        </where>
+        GROUP BY cami.merchant_name,cami.mechanism,cami.status,cami.merchant_id,cami.credentials_no
+    </select>
+
+</mapper>
