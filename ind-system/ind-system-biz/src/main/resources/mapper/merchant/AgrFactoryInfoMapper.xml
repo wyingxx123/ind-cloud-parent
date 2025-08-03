@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.merchant.AgrFactoryInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.merchant.AgrFactoryInfoEntity">
+        <id column="server_id" property="serverId"/>
+        <result column="server_name" property="serverName"/>
+        <result column="factory_ip" property="factoryIp"/>
+        <result column="status" property="status"/>
+        <result column="operator" property="operator"/>
+        <result column="registration_time" property="registrationTime"/>
+        <result column="operation_time" property="operationTime"/>
+        <result column="port" property="port"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        server_id, server_name, factory_ip, status, operator, registration_time, operation_time, port
+    </sql>
+
+    <!-- 根据商户id获取工厂信息明细 -->
+    <select id="getByMerchantId" parameterType="Long" resultMap="BaseResultMap">
+        select
+        f.*
+        from
+        c_agr_factory_info f
+        left join c_agr_merchant_info m on m.server_id = f.server_id
+        where m.merchant_id = #{merchantId}
+    </select>
+</mapper>

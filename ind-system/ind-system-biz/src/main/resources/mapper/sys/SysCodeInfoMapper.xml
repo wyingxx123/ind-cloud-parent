@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.sys.SysCodeInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.sys.SysCodeInfoEntity">
+        <id column="code_no" property="codeNo" />
+        <result column="code_type" property="codeType" />
+        <result column="code_status" property="codeStatus" />
+        <result column="code_role" property="codeRole" />
+        <result column="code_user" property="codeUser" />
+        <result column="code_menu" property="codeMenu" />
+        <result column="code_url" property="codeUrl" />
+        <result column="remark" property="remark" />
+        <result column="effective_time" property="effectiveTime" />
+        <result column="create_by" property="createBy" />
+        <result column="create_time" property="createTime" />
+        <result column="update_by" property="updateBy" />
+        <result column="update_time" property="updateTime" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="merchant_name" property="merchantName" />
+        <result column="del_flg" property="delFlg" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        code_no, code_type, code_status, code_role, code_user, code_menu, code_url, remark, effective_time, create_by, create_time, update_by, update_time, merchant_id,merchant_name, del_flg
+    </sql>
+
+</mapper>
