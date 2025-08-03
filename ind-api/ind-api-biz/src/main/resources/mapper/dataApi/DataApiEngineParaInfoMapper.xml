@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.dataapi.DataApiEngineParaInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.dataapi.DataApiEngineParaInfoEntity">
+        <result column="engine_no" property="engineNo" />
+        <result column="engine_para_no" property="engineParaNo" />
+        <result column="engine_para_group_no" property="engineParaGroupNo" />
+        <result column="engine_para_type" property="engineParaType" />
+        <result column="engine_para_in_type" property="engineParaInType" />
+        <result column="engine_para_out_type" property="engineParaOutType" />
+        <result column="engine_para_name" property="engineParaName" />
+        <result column="engine_para_status" property="engineParaStatus" />
+        <result column="engine_para_out" property="engineParaOut" />
+        <result column="engine_para_out_re" property="engineParaOutRe" />
+        <result column="description" property="description" />
+        <result column="note" property="note" />
+        <result column="operator" property="operator" />
+        <result column="reg_date" property="regDate" />
+        <result column="op_date" property="opDate" />
+        <result column="op_time" property="opTime" />
+        <result column="expire_time" property="expireTime"/>
+        <result column="server_id" property="serverId"/>
+        <result column="data_src_cd" property="dataSrcCd"/>
+        <result column="del_flg" property="delFlg"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        engine_no
+        , engine_para_no, engine_para_group_no, engine_para_type, engine_para_in_type, engine_para_out_type, engine_para_name, engine_para_status, engine_para_out, engine_para_out_re, description, note, operator, reg_date, op_date, op_time, expire_time, server_id, data_src_cd, del_flg
+    </sql>
+
+</mapper>

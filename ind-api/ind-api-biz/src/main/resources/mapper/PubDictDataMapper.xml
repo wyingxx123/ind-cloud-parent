@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.PubDictDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.PubDictDataEntity">
+        <id column="dict_type" property="dictType" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="dict_code" property="dictCode" />
+        <result column="sort_no" property="sortNo" />
+        <result column="status" property="status" />
+        <result column="code_name" property="codeName" />
+        <result column="code_label" property="codeLabel" />
+        <result column="code_value" property="codeValue" />
+        <result column="icon_class" property="iconClass" />
+        <result column="css_class" property="cssClass" />
+        <result column="list_class" property="listClass" />
+        <result column="is_default" property="isDefault" />
+        <result column="description" property="description" />
+        <result column="note" property="note" />
+        <result column="operator" property="operator" />
+        <result column="reg_date" property="regDate" />
+        <result column="op_date" property="opDate" />
+        <result column="op_time" property="opTime" />
+        <result column="server_id" property="serverId" />
+        <result column="data_src_cd" property="dataSrcCd" />
+        <result column="del_flg" property="delFlg" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        dict_type, merchant_id, dict_code, sort_no, status, code_name, code_label, code_value, icon_class, css_class, list_class, is_default, description, note, operator, reg_date, op_date, op_time, server_id, data_src_cd, del_flg
+    </sql>
+
+    <select id="getDictDataByType" resultType="com.dfc.ind.vo.PubDictDataVo">
+        SELECT t.dict_type AS dictType,t.merchant_id as merchantId,t.subject,t.dict_name AS dictName,d.dict_code AS dictCode,d.sort_no AS sortNo,d.code_name AS codeName,d.code_label AS codeLabel,d.code_value AS codeValue,d.list_class as listClass,d.is_default AS isDefault,d.is_display as isDisplay,d.description,d.resource
+        FROM c_pub_dict_type t
+         INNER JOIN c_pub_dict_data d ON t.dict_type=d.dict_type
+         WHERE  t.dict_type=#{dictType}
+           <if test="dictCode!=null and dictCode !=''">
+               AND d.dict_code=#{dictCode}
+           </if>
+           <if test="merchantId!=null ">
+               AND t.merchant_id=#{merchantId}
+           </if>
+           AND d.status="00" AND t.status="00"
+         ORDER BY d.sort_no
+    </select>
+
+    <select id="selectDictTypeAll" resultType="com.dfc.ind.vo.PubDictDataVo">
+        SELECT dict_type,merchant_id from c_pub_dict_type where `status`='00' and del_flg='0' group by dict_type,merchant_id
+    </select>
+    <select id="getMaxDictCodeByDictType" resultType="java.lang.String">
+        SELECT MAX(dict_code) FROM c_pub_dict_data where dict_type=#{dictType} and merchant_id=#{merchantId}
+    </select>
+
+
+    <select id="getDictDataByTypeLike" resultType="com.dfc.ind.vo.PubDictDataVo">
+        SELECT t.dict_type AS dictType,t.merchant_id as merchantId,t.subject,t.dict_name AS dictName,d.dict_code AS dictCode,d.sort_no AS sortNo,d.code_name AS codeName,d.code_label AS codeLabel,d.code_value AS codeValue,d.is_default AS isDefault,d.is_display as isDisplay,d.description,d.resource
+        FROM c_pub_dict_type t
+        INNER JOIN c_pub_dict_data d ON t.dict_type=d.dict_type
+        WHERE  t.dict_type like concat('%',{dictType},'%')
+        <if test="dictCode!=null and dictCode !=''">
+            AND d.dict_code=#{dictCode}
+        </if>
+       AND t.merchant_id=#{merchantId} AND d.status ='00' AND t.status='00'
+        ORDER BY d.sort_no
+    </select>
+
+    <select id="getDictData" resultType="com.dfc.ind.vo.PubDictDataVo">
+        SELECT t.dict_type AS dictType,t.merchant_id as merchantId,t.subject,t.dict_name AS dictName,d.dict_code AS dictCode,d.sort_no AS sortNo,d.code_name AS codeName,d.code_label AS codeLabel,d.code_value AS codeValue,d.is_default AS isDefault,d.is_display as isDisplay,d.description,d.resource
+        FROM c_pub_dict_type t
+        INNER JOIN c_pub_dict_data d ON t.dict_type=d.dict_type
+       where d.status="00" AND t.status="00"
+            <if test="dictType!=null and dictType !=''">
+                and t.dict_type like concat(#{dictType},'%')
+            </if>
+            <if test="dictCode!=null and dictCode !=''">
+                AND d.dict_code=#{dictCode}
+            </if>
+            <if test="subjectUp!=null and subjectUp !=''">
+                AND t.subject_up=#{subjectUp}
+            </if>
+            <if test="merchantId!=null ">
+                AND t.merchant_id=#{merchantId}
+            </if>
+        ORDER BY d.sort_no
+    </select>
+</mapper>

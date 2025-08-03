@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.dfc.ind.common.security.service.UserDetailsServiceImpl,\
+  com.dfc.ind.common.security.service.PermissionService,\
+  com.dfc.ind.common.security.config.MethodSecurityConfig,\
+  com.dfc.ind.common.security.handler.CustomAccessDeniedHandler,\
+  com.dfc.ind.common.security.handler.GlobalExceptionHandler
+
+  

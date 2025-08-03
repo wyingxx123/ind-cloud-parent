@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.PubDictTypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.PubDictTypeEntity">
+        <id column="dict_id" property="dictId" />
+        <result column="merchant_id" property="merchantId" />
+        <result column="sort_no" property="sortNo" />
+        <result column="dict_type" property="dictType" />
+        <result column="subject_level_code" property="subjectLevelCode" />
+        <result column="subject" property="subject" />
+        <result column="subject_up" property="subjectUp" />
+        <result column="subject_up_list" property="subjectUpList" />
+        <result column="status" property="status" />
+        <result column="dict_name" property="dictName" />
+        <result column="description" property="description" />
+        <result column="note" property="note" />
+        <result column="operator" property="operator" />
+        <result column="reg_date" property="regDate" />
+        <result column="op_date" property="opDate" />
+        <result column="op_time" property="opTime" />
+        <result column="server_id" property="serverId" />
+        <result column="data_src_cd" property="dataSrcCd" />
+        <result column="del_flg" property="delFlg" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        dict_id, merchant_id, sort_no, dict_type, subject_level_code, subject, subject_up, subject_up_list, status, dict_name, description, note, operator, reg_date, op_date, op_time, server_id, data_src_cd, del_flg
+    </sql>
+
+</mapper>
