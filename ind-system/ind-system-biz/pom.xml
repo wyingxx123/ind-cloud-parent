@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ind-system</artifactId>
+        <groupId>com.dfc</groupId>
+        <version>1.0.RELEASE</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <!--忽略deploy发布到私服-->
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <ind-common.version>1.0.RELEASE</ind-common.version>
+
+        <!--发布镜像的目标地址-->
+        <!--        <dockerService>http://192.168.4.52:2375</dockerService>-->
+    </properties>
+
+    <artifactId>ind-system-biz</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Spring Cloud Begin -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- Spring Cloud End -->
+
+        <!-- SpringCloud Ailibaba Sentinel -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- Mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- Web依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Swagger -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.fox.version}</version>
+        </dependency>
+
+        <!-- 模块依赖 -->
+        <dependency>
+            <groupId>com.dfc</groupId>
+            <artifactId>ind-system-api</artifactId>
+            <version>${ind-common.version}</version>
+        </dependency>
+
+        <!-- ind Common Security -->
+        <dependency>
+            <groupId>com.dfc</groupId>
+            <artifactId>ind-common-security</artifactId>
+            <version>${ind-common.version}</version>
+        </dependency>
+
+        <!-- ind Common Datascope -->
+        <dependency>
+            <groupId>com.dfc</groupId>
+            <artifactId>ind-common-datascope</artifactId>
+            <version>${ind-common.version}</version>
+        </dependency>
+
+        <!-- ind Common Log -->
+        <dependency>
+            <groupId>com.dfc</groupId>
+            <artifactId>ind-common-log</artifactId>
+            <version>${ind-common.version}</version>
+        </dependency>
+
+        <!-- ind Common Swagger -->
+        <dependency>
+            <groupId>com.dfc</groupId>
+            <artifactId>ind-common-swagger</artifactId>
+            <version>${ind-common.version}</version>
+        </dependency>
+
+        <!-- ind Common Redis-->
+        <dependency>
+            <groupId>com.dfc</groupId>
+            <artifactId>ind-common-redis</artifactId>
+            <version>${ind-common.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java</artifactId>
+            <version>3.1.693</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.dfc.ind.SystemBizApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
