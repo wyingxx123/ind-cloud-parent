@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.dataapi.DataApiCallLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.dataapi.DataApiCallLogEntity">
+        <result column="log_id" property="logId" />
+        <result column="app_id" property="appId" />
+        <result column="server_id" property="serverId" />
+        <result column="session_server_id" property="sessionServerId" />
+        <result column="call_count" property="callCount" />
+        <result column="call_type" property="callType" />
+        <result column="result_status" property="resultStatus" />
+        <result column="spend_time" property="spendTime" />
+        <result column="call_start_time" property="callStartTime" />
+        <result column="call_end_time" property="callEndTime" />
+        <result column="return_msg" property="returnMsg" />
+        <result column="request_host" property="requestHost" />
+        <result column="request_url" property="requestUrl" />
+        <result column="request_para" property="requestPara" />
+        <result column="description" property="description" />
+        <result column="note" property="note" />
+        <result column="operator" property="operator" />
+        <result column="op_date" property="opDate" />
+        <result column="op_time" property="opTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        log_id, app_id, server_id, session_server_id, call_count, call_type, result_status, spend_time, call_start_time, call_end_time, return_msg, request_host, request_url, request_para, description, note, operator, op_date, op_time
+    </sql>
+
+</mapper>

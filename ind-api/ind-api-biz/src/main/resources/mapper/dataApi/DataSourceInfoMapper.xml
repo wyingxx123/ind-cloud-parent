@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.dataapi.DataSourceInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.dataapi.DataSourceInfoEntity">
+        <result column="source_id" property="sourceId" />
+        <result column="app_id" property="appId" />
+        <result column="source_name" property="sourceName" />
+        <result column="source_mount_path" property="sourceMountPath" />
+        <result column="source_adapter_type" property="sourceAdapterType" />
+        <result column="source_status" property="sourceStatus" />
+        <result column="source_secret_key" property="sourceSecretKey" />
+        <result column="is_auto_publish" property="isAutoPublish" />
+        <result column="description" property="description" />
+        <result column="note" property="note" />
+        <result column="operator" property="operator" />
+        <result column="reg_date" property="regDate" />
+        <result column="op_date" property="opDate" />
+        <result column="op_time" property="opTime" />
+        <result column="server_id" property="serverId" />
+        <result column="data_src_cd" property="dataSrcCd" />
+        <result column="del_flg" property="delFlg" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        source_id, app_id, source_name, source_mount_path, source_adapter_type, source_status, source_secret_key, is_auto_publish, description, note, operator, reg_date, op_date, op_time, server_id, data_src_cd, del_flg
+    </sql>
+
+</mapper>

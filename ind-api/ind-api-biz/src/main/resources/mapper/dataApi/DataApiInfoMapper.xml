@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dfc.ind.mapper.dataapi.DataApiInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dfc.ind.entity.dataapi.DataApiInfoEntity">
+        <id column="service_id" property="serviceId" />
+        <result column="app_id" property="appId" />
+        <result column="api_id" property="apiId" />
+        <result column="api_version" property="apiVersion" />
+        <result column="api_path" property="apiPath" />
+        <result column="api_name" property="apiName" />
+        <result column="api_call_type" property="apiCallType" />
+        <result column="api_call_count_limit" property="apiCallCountLimit" />
+        <result column="resource_id" property="resourceId" />
+        <result column="service_type" property="serviceType" />
+        <result column="service_status" property="serviceStatus" />
+        <result column="service_name" property="serviceName" />
+        <result column="service_resource" property="serviceResource" />
+        <result column="service_parament" property="serviceParament" />
+        <result column="service_desc" property="serviceDesc" />
+        <result column="service_note" property="serviceNote" />
+        <result column="source_id" property="sourceId" />
+        <result column="source_name" property="sourceName" />
+        <result column="source_adapter_type" property="sourceAdapterType" />
+        <result column="source_secret_key" property="sourceSecretKey" />
+        <result column="source_para" property="sourcePara" />
+        <result column="auth_reg_time" property="authRegTime" />
+        <result column="auth_start_date" property="authStartDate" />
+        <result column="auth_upd_time" property="authUpdTime" />
+        <result column="auth_end_date" property="authEndDate" />
+        <result column="description" property="description" />
+        <result column="note" property="note" />
+        <result column="operator" property="operator" />
+        <result column="reg_date" property="regDate" />
+        <result column="op_date" property="opDate" />
+        <result column="op_time" property="opTime" />
+        <result column="server_id" property="serverId" />
+        <result column="data_src_cd" property="dataSrcCd" />
+        <result column="del_flg" property="delFlg" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        ServiceID, AppID, API_ID, API_Version, API_Path, ServiceType, ServiceStatus, ServiceName, ServiceResource, ServiceParament, ServiceDesc, ServiceNote, LastLoginTime, RegTime, StartDate, UpdTime, EndDate
+    </sql>
+
+    <select id="getMetaDataByTableName" resultType="com.dfc.ind.entity.dataapi.vo.MetaDataVo">
+        select column_name as name, (case when column_key = 'PRI' then '1' else '0' end) as isPk, ordinal_position as sort
+        from information_schema.columns where table_name =#{tableName}
+            and  TABLE_SCHEMA=#{schema}
+        order by ordinal_position
+    </select>
+    <select id="getData" resultType="java.util.Map">
+        select  * from `${schema}`.${tableName} where 1=1
+        <if test="andSql !=null and andSql !=''">
+            ${andSql}
+        </if>
+    </select>
+
+    <select id="getSourceData" resultType="java.util.Map">
+        SELECT data_source_id,adapter_type,`schema`,user_name,pass_word,url FROM data_api_source_info
+    </select>
+
+    <select id="getApiDataByAppId" resultType="com.dfc.ind.entity.dataapi.vo.ApiInfoCatchDTO">
+        SELECT a.api_id AS apiId,a.sql_type as sqlType,s.effective_start_date as pubEffectiveStartDate,s.effective_end_date as pubEffectiveEndDate,s.share_type AS shareType,s.share_count_limit AS shareCountLimit,a.`code` as apiCode,c.`code` AS appId,a.`name` AS name,"SINGLE-ENGINE" AS type,a.api_id AS engineSource,a.`name` AS apiDesc,s.path AS path,a.version AS version,c.data_source_id AS dataSourceId,a.sql_job AS sqlJob,a.request_protocol AS requestProtocol,a.request_method AS requestMethod,a.response_type AS responseType,a.request_param AS requestParam,a.response_param AS responseParam FROM dpub.api_info a
+            INNER JOIN dpub.api_release s ON a.api_id=s.api_id
+            INNER JOIN dpub.application_api_auth u ON u.api_id=s.api_id
+        INNER JOIN dpub.application c ON c.application_id=u.application_id
+
+        where a.release_status='1' and a.enabled_status='1' and s.enabled_status='1' and c.`code`=#{applicationCode}
+    </select>
+    <select id="getFiledTypeData" resultType="com.dfc.ind.entity.dataapi.vo.FiledTypeVo">
+        select table_schema,TABLE_NAME, column_name,column_type
+        from information_schema.columns where table_schema in (SELECT s.source_desc as sourceDesc FROM dam.data_source_info s
+        INNER JOIN dam.adapter_info d ON s.adapter_id=d.adapter_id
+        where s.app_id='dpub' and d.adapter_type='MYSQL' and s.source_desc is NOT null and s.source_desc !='')
+        order by table_schema,TABLE_NAME,ordinal_position
+    </select>
+
+
+    <select id="getMetaData" resultType="java.util.LinkedHashMap">
+        select column_name, (case when (is_nullable = 'no' != column_key != 'PRI') then '1' else null end) as is_required, (case when column_key = 'PRI' then '1' else '0' end) as is_pk, ordinal_position as sort, column_comment, (case when extra = 'auto_increment' then '1' else '0' end) as is_increment, column_type
+        from information_schema.columns where table_schema = #{schema} and table_name = #{tableName}
+        order by ordinal_position
+    </select>
+</mapper>
