@@ -106,7 +106,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private String smsSign;
 
     //验证码过期时间
-    @Value("${sms.timeOut:2}")
+    @Value("${sms.timeOut}")
     private String smsTimeOut;
     @Override
     @Transactional

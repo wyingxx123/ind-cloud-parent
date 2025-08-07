@@ -1,0 +1,50 @@
+# Tomcat
+server:
+  port: 8650
+
+# Spring
+spring: 
+  application:
+    # 应用名称
+    name: ind-system
+  profiles:
+    # 环境配置
+    active: dev
+  cloud:
+    nacos:
+      # 服务注册地址
+      server-addr: 127.0.0.1:8848
+      username: nacos
+      password: nacos
+
+      discovery:
+        namespace: ind_cloud_dev
+      config:
+        namespace: ind_cloud_dev
+        # 配置文件格式
+        file-extension: yml
+        # 全局启用动态刷新
+        refresh-enabled: true
+        # 共享配置
+        shared-configs:
+#          - data-id: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+          - data-id: common.yml
+          - data-id: common-redis.yml
+          - data-id: common-datasource.yml
+          - data-id: common-sms.yml
+          - data-id: ind-system.yml
+#          - data-id: application.yml
+  main:
+    allow-bean-definition-overriding: true
+wechat:
+  ip: 10.1.110.60
+  port: 18888
+  phone: 15888888886
+
+logging:
+  level:
+    com:
+      alibaba:
+        nacos: warn
+fileManager:
+  fileServerPath: 119.91.134.111:22122
