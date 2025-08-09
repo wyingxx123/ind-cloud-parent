@@ -152,6 +152,12 @@
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons.fileupload.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.dfc</groupId>
+                <artifactId>ind-common-core</artifactId>
+                <version>1.0.RELEASE</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
