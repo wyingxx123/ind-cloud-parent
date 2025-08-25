@@ -1,6 +1,7 @@
 package com.dfc.ind.common.core.constant;
 
-import jdk.nashorn.internal.ir.debug.ClassHistogramElement;
+// 删除这行导入
+// import jdk.nashorn.internal.ir.debug.ClassHistogramElement;
 
 /**
  * 通用常量信息

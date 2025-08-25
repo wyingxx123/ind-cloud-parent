@@ -9,15 +9,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>ind-gateway</artifactId>
-    <properties>
-        <ind-common.version>1.0.RELEASE</ind-common.version>
-    </properties>
+    
     <description>
         ind-gateway网关模块
     </description>
 
     <dependencies>
-
         <!-- SpringCloud Gateway -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -27,84 +24,74 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-web</artifactId>
                 </exclusion>
-
             </exclusions>
         </dependency>
-
-        <!-- SpringCloud Ailibaba Nacos -->
+    
+        <!-- SpringCloud Alibaba Nacos -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-
-        <!-- SpringCloud Ailibaba Nacos Config -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
-
-        <!-- SpringCloud Ailibaba Sentinel -->
+    
+        <!-- SpringCloud Alibaba Sentinel -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
-
-        <!-- SpringCloud Ailibaba Sentinel Gateway -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
         </dependency>
-
-        <!-- Sentinel Datasource Nacos -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-datasource-nacos</artifactId>
         </dependency>
-
+    
+        <!-- 数据库 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!--验证码 -->
-        <dependency>
-            <groupId>com.github.penggle</groupId>
-            <artifactId>kaptcha</artifactId>
-
-        </dependency>
+        <!-- 移除版本号，使用父级管理 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.6</version>
         </dependency>
-        <!--   Common Redis-->
+    
+        <!-- 验证码 - 移除版本号，使用父级管理 -->
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+        </dependency>
+    
+        <!-- 项目内部模块 - 移除版本号，使用父级管理 -->
         <dependency>
             <groupId>com.dfc</groupId>
             <artifactId>ind-common-redis</artifactId>
-            <version>1.0.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>com.dfc</groupId>
             <artifactId>ind-system-api</artifactId>
-            <version>${ind-common.version}</version>
         </dependency>
-        <!--rabbitmq-->
+    
+        <!-- 消息队列 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
-        <!-- Swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.fox.version}</version>
         </dependency>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.fox.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
