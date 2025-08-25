@@ -13,14 +13,14 @@ spring:
   cloud:
     nacos:
       # 服务注册地址
-      server-addr: 192.168.1.10:8848
+      server-addr: 127.0.0.1:8848
       username: nacos
       password: nacos
 
       discovery:
-        namespace: indcloud
+        namespace: ind_cloud_dev
       config:
-        namespace: indcloud
+        namespace: ind_cloud_dev
         # 配置文件格式
         file-extension: yml
         # 全局启用动态刷新
