@@ -14,7 +14,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author admin
  */
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+    com.alibaba.cloud.nacos.discovery.NacosDiscoveryAutoConfiguration.class,
+    com.alibaba.cloud.nacos.NacosConfigAutoConfiguration.class,
+    com.alibaba.cloud.nacos.discovery.NacosDiscoveryClientConfiguration.class,
+    com.alibaba.cloud.nacos.discovery.reactive.NacosReactiveDiscoveryClientConfiguration.class,
+    com.alibaba.cloud.nacos.registry.NacosServiceRegistryAutoConfiguration.class
+})
+@MapperScan("com.dfc.ind.gateway.mapper")
 public class GatewayApplication
 {
     public static void main(String[] args) {

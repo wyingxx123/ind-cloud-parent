@@ -1,6 +1,7 @@
 package com.dfc.ind.auth;
 
 import com.dfc.ind.common.security.annotation.EnableRyFeignClients;
+import com.dfc.ind.common.swagger.annotation.EnableCustomSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -13,6 +14,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @EnableDiscoveryClient
 @EnableRyFeignClients
+@EnableCustomSwagger2
 @SpringBootApplication
 public class AuthApplication
 {

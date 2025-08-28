@@ -60,6 +60,13 @@
             <version>1.0.RELEASE</version>
         </dependency>
 
+        <!-- ind Common Swagger -->
+        <dependency>
+            <groupId>com.dfc</groupId>
+            <artifactId>ind-common-swagger</artifactId>
+            <version>1.0.RELEASE</version>
+        </dependency>
+
         <!-- JAXB API -->
         <dependency>
             <groupId>javax.xml.bind</groupId>

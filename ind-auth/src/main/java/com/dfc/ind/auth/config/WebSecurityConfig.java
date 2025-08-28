@@ -55,11 +55,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         .authorizeRequests()
         .antMatchers(
             "/actuator/**",
-            "/oauth/*",
-            "/token/**").permitAll()
+            "/oauth/**",              // OAuth2 相关接口（修复通配符）
+            "/token/**",
+            "/v2/api-docs",           // Swagger API 文档
+            "/doc.html",              // Knife4j 文档页面
+            "/webjars/**",            // 静态资源
+            "/swagger-ui.html",       // Swagger UI
+            "/swagger-resources/**"   // Swagger 资源
+        ).permitAll()
         .anyRequest().authenticated()
         .and().csrf().disable();
-
-
     }
 }

@@ -34,6 +34,48 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+# Swagger配置
+swagger:
+  enabled: true
+  title: 数据API服务接口文档
+  description: 提供数据API相关的接口服务
+  version: 1.0.0
+  base-package: com.dfc.ind.controller
+  contact:
+    name: 开发团队
+    email: dev@dfc.com
+    url: http://www.dfc.com
+  authorization:
+    name: Authorization
+    auth-regex: ^.*$
+    authorization-scope-list:
+      - scope: global
+        description: 全局访问权限
+    token-url-list:
+      - http://localhost:8080/auth/oauth/token
+
+# 安全配置 - 排除Swagger相关路径的认证
+security:
+  oauth2:
+    ignore:
+      urls:
+        - /v2/api-docs
+        - /v2/api-docs/**
+        - /swagger-resources
+        - /swagger-resources/**
+        - /swagger-ui.html
+        - /swagger-ui/**
+        - /doc.html
+        - /webjars/**
+        - /favicon.ico
+        - /actuator/**
+
+logging:
+  level:
+    com:
+      alibaba:
+        nacos: ERROR
+
 
 
 

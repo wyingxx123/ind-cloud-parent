@@ -47,3 +47,28 @@ session:
 
 vxip: 10.168.33.72
 vxport: 16666
+
+# Swagger配置
+swagger:
+  enabled: true
+  title: 认证授权中心 API
+  description: 提供OAuth2认证和授权服务的API接口
+  version: 1.0.0
+  base-package: com.dfc.ind.auth.controller
+  contact:
+    name: 开发团队
+    email: dev@example.com
+  authorization:
+    name: OAuth2
+    auth-regex: ^.*$
+    authorization-scope-list:
+      - scope: server
+        description: 服务端权限
+    token-url-list:
+      - http://localhost:8601/oauth/token
+
+logging:
+  level:
+    com:
+      alibaba:
+        nacos: ERROR

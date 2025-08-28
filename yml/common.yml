@@ -117,5 +117,9 @@ security:
         - /websocket/**
         - /testReport/**
         - /reportBigScreen/**
-        - /appDownloadInfo/list         
+        - /doc.html
+        - /webjars/**
+        - /swagger-ui.html
+        - /swagger-resources/**
+        - /appDownloadInfo/list
       

@@ -10,61 +10,56 @@ spring:
   profiles:
     # 环境配置
     active: dev
-  cloud:
-    nacos:
-      # 服务注册地址
-      server-addr: 127.0.0.1:8848
-      username: nacos
-      password: nacos
+#  cloud:
+#    nacos:
+#      # 服务注册地址
+#      server-addr: 127.0.0.1:8848
+#      discovery:
+#        namespace: ind_cloud_dev
+#
+#      config:
+#        namespace: ind_cloud_dev
+#
+##        auto-refresh: true
+##        access-key: nacos
+##        secret-key: nacos
+##          # 扩展配置（2.4.0新增要求）
+##        config-long-poll-timeout: 30000
+##        config-retry-time: 2000
+##        max-retry: 3
+#
+#        refresh-enabled: true
+#        # 配置文件格式
+#        file-extension: yml
+#        # 共享配置
+#        shared-configs:
+#          - data-id: common.yml
+#          - data-id: common-datasource.yml
+#          - data-id: ind-gateway-dev.yml
 
-      discovery:
-        namespace: ind_cloud_dev
-
-      config:
-        namespace: ind_cloud_dev
-
-#        auto-refresh: true
-#        access-key: nacos
-#        secret-key: nacos
-#          # 扩展配置（2.4.0新增要求）
-#        config-long-poll-timeout: 30000
-#        config-retry-time: 2000
-#        max-retry: 3
-
-        refresh-enabled: true
-        # 配置文件格式
-        file-extension: yml
-        # 共享配置
-        shared-configs:
-          - data-id: common.yml
-          - data-id: common-datasource.yml
-          - data-id: ind-gateway-dev.yml
-
-    sentinel:
-      # 取消控制台懒加载
-      eager: true
-      transport:
-        # 控制台地址
-        dashboard: 127.0.0.1:8718
-        username: nacos
-        password: nacos
-      # nacos配置持久化
-      datasource:
-        ds1:
-          nacos:
-            server-addr: 127.0.0.1:8848
-            username: nacos
-            password: nacos
-            dataId: sentinel-ruoyi-gateway
-            groupId: DEFAULT_GROUP
-            data-type: json
-            rule-type: gw-flow
+#    sentinel:
+#      # 取消控制台懒加载
+#      eager: true
+#      transport:
+#        # 控制台地址
+#        dashboard: 127.0.0.1:8718
+#        username: nacos
+#        password: nacos
+#      # nacos配置持久化
+#      datasource:
+#        ds1:
+#          nacos:
+#            server-addr: 127.0.0.1:8848
+#            dataId: sentinel-ruoyi-gateway
+#            groupId: DEFAULT_GROUP
+#            data-type: json
+#            rule-type: gw-flow
   main:
     allow-bean-definition-overriding: true
 
 logging:
   level:
-    com.alibaba.nacos: TRACE
+    com.alibaba.nacos: ERROR
     org.springframework.cloud: DEBUG
 
 pub:

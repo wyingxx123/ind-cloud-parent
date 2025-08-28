@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.SqlParserUtils;
 import com.dfc.ind.common.core.utils.StringUtils;
 import com.dfc.ind.common.core.web.domain.JsonResults;
-import com.dfc.ind.utils.SecurityUtils;
+import com.dfc.ind.common.security.utils.SecurityUtils;
 import com.dfc.ind.entity.dataapi.DataApiColumnInfoEntity;
 import com.dfc.ind.entity.dataapi.DataApiInfoEntity;
 import com.dfc.ind.entity.dataapi.vo.ApiColumnVo;

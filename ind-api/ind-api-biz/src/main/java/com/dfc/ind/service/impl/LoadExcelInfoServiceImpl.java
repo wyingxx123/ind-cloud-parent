@@ -5,7 +5,7 @@ import com.dfc.ind.common.core.exception.CustomException;
 import com.dfc.ind.common.core.utils.DateUtils;
 import com.dfc.ind.common.core.utils.StringUtils;
 import com.dfc.ind.common.core.web.domain.JsonResults;
-import com.dfc.ind.utils.SecurityUtils;
+import com.dfc.ind.common.security.utils.SecurityUtils;
 import com.dfc.ind.entity.LoadExcelInfoEntity;
 
 import com.dfc.ind.mapper.LoadExcelInfoMapper;

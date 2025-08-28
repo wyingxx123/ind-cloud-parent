@@ -4,3 +4,22 @@ spring:
     url: jdbc:mysql://127.0.0.1:3315/ind-cloud-api?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
     password: admin
+
+# Swagger配置
+swagger:
+  enabled: true
+  title: 认证授权中心 API
+  description: 提供OAuth2认证和授权服务的API接口
+  version: 1.0.0
+  base-package: com.dfc.ind.auth.controller
+  contact:
+    name: 开发团队
+    email: dev@example.com
+  authorization:
+    name: OAuth2
+    auth-regex: ^.*$
+    authorization-scope-list:
+      - scope: server
+        description: 服务端权限
+    token-url-list:
+      - http://localhost:8601/oauth/token

@@ -1,7 +1,7 @@
 package com.dfc.ind.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.dfc.ind.utils.SecurityUtils;
+import com.dfc.ind.common.security.utils.SecurityUtils;
 import com.dfc.ind.entity.PubDictDataEntity;
 
 import com.dfc.ind.mapper.PubDictDataMapper;

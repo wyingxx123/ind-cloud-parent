@@ -1,0 +1,99 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: ind-system
+          uri: http://localhost:8650
+          predicates:
+            - Path=/system/**
+          filters:
+            - StripPrefix=1
+        - id: ind-auth
+          uri: http://localhost:8601
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+        - id: ind-api
+          uri: http://localhost:8667
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1
+        - id: swagger-doc
+          uri: http://localhost:8650
+          predicates:
+            - Path=/doc.html
+          filters:
+            - StripPrefix=0
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ind-cloud-sys?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    hikari:
+      # 连接池中允许的最小连接数。缺省值：10
+      minimum-idle: 10
+      # 连接池中允许的最大连接数。缺省值：10
+      maximum-pool-size: 20
+      # 自动提交
+      auto-commit: true
+      # 一个连接idle状态的最大时长（毫秒），超时则被释放（retired），缺省:10分钟
+      idle-timeout: 30000
+      # 连接池名字
+      pool-name: DatebookHikariCP
+      # 一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省:30分钟，建议设置比数据库超时时长少2-4分钟
+      max-lifetime: 1800000
+      # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 缺省:30秒
+      connection-timeout: 30000
+
+# 安全配置
+security:
+  oauth2:
+    ignore:
+      urls:
+        - /doc.html
+        - /swagger-resources/**
+        - /v2/api-docs
+        - /webjars/**
+        - /system/v2/api-docs
+        - /api/v2/api-docs
+        - /actuator/**
+
+# MyBatis配置
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.dfc.ind.gateway.entity
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mybatis/mybatis-config.xml
+
+# knife4j配置
+knife4j:
+  # 聚合swagger文档
+  gateway:
+    enabled: true
+    # 排序规则(tag/operation排序自4.2.0版本新增)
+    tags-sorter: order
+    operations-sorter: order
+    # 指定手动配置的模式(默认为该模式)
+    strategy: manual
+    routes:
+      - name: ind-system
+        url: /system/v2/api-docs
+        service-name: ind-system
+        order: 1
+      - name: ind-api  
+        url: /api/v2/api-docs
+        service-name: ind-api
+        order: 2
+  # 生产环境配置
+  production: false
+  # 基本认证配置
+  basic:
+    enable: false

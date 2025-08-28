@@ -77,14 +77,26 @@ public class GlobalFiltes implements GlobalFilter , Order {
         String token = null;
         log.info("当前请求" + exchange.getRequest().getURI().getPath() + "这样的");
         String path = exchange.getRequest().getURI().getPath();
+        
+        // 添加调试日志
+        log.info("authIgnoreConfig.getUrls(): " + authIgnoreConfig.getUrls());
+        
         //如果是免认证接口直接放行
         for (String url : authIgnoreConfig.getUrls()) {
             url=url.replaceAll("\\*",".*");
+            log.info("检查路径匹配: " + path + " vs " + url);
             if (path.matches(url)){
+                log.info("路径匹配成功，直接放行: " + path);
                 return chain.filter(exchange);
             }
         }
         if (path.equals("/oauth/token")||path.equals("/dpub/authorize")||path.equals("/oauth/check_token")||path.equals("/user/getInfo")){
+            return chain.filter(exchange);
+        }
+        // Swagger 相关路径直接放行
+        if (path.equals("/doc.html") || path.startsWith("/swagger-resources") || 
+            path.startsWith("/v2/api-docs") || path.startsWith("/webjars/") ||
+            path.startsWith("/system/v2/api-docs") || path.startsWith("/api/v2/api-docs")) {
             return chain.filter(exchange);
         }
         ServerHttpResponse response = exchange.getResponse();

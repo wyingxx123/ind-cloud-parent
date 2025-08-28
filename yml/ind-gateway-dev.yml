@@ -153,6 +153,16 @@ spring:
             - Path=/api/**
           filters:
             - StripPrefix=1
+        # Knife4j 文档路由到系统服务
+        - id: knife4j-doc
+          uri: lb://ind-system
+          predicates:
+            - Path=/doc.html
+        # Knife4j 静态资源路由到系统服务
+        - id: knife4j-webjars
+          uri: lb://ind-system
+          predicates:
+            - Path=/webjars/**
 management:
   server:
     port: -1

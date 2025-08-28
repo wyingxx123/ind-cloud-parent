@@ -15,9 +15,12 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -42,22 +45,25 @@ import java.nio.charset.StandardCharsets;
  *
  *
  */
-//@Configuration
-//@EnableResourceServer
+@Configuration
+@EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter
 {
+    private static final Logger logger = LoggerFactory.getLogger(ResourceServerConfig.class);
     @Autowired
     private ResourceServerProperties resourceServerProperties;
 
     @Autowired
     private OAuth2ClientProperties oAuth2ClientProperties;
 
-    @Bean
-    public AuthIgnoreConfig authIgnoreConfig()
-    {
-        return new AuthIgnoreConfig();
-    }
+    @Autowired
+    private AuthIgnoreConfig authIgnoreConfig;
 
+    @PostConstruct
+    public void init() {
+        logger.info("=== ResourceServerConfig @PostConstruct called! ===");
+        logger.info("=== @EnableResourceServer annotation should activate this config ===");
+    }
 
     @Bean
     @LoadBalanced
@@ -88,12 +94,30 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception
     {
+        logger.info("=== ResourceServerConfig.configure() called! ===");
         http.csrf().disable();
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http
                 .authorizeRequests();
         // 不登录可以访问
-        authIgnoreConfig().getUrls().forEach(url -> registry.antMatchers(url).permitAll());
+        logger.info("AuthIgnoreConfig URLs: " + authIgnoreConfig.getUrls());
+        authIgnoreConfig.getUrls().forEach(url -> {
+            logger.info("Adding permit all for URL: " + url);
+            registry.antMatchers(url).permitAll();
+        });
+        
+        // 临时添加测试端点
+        registry.antMatchers("/test/**").permitAll();
+        logger.info("Added permitAll for /test/**");
+        
+        // 添加 Swagger 相关路径
+        registry.antMatchers("/v2/api-docs").permitAll();
+        registry.antMatchers("/swagger-resources/**").permitAll();
+        registry.antMatchers("/swagger-ui.html").permitAll();
+        registry.antMatchers("/doc.html").permitAll();
+        registry.antMatchers("/webjars/**").permitAll();
+        logger.info("Added permitAll for Swagger paths");
         registry.anyRequest().authenticated();
+        logger.info("=== ResourceServerConfig.configure() completed! ===");
     }
 
     @Override
