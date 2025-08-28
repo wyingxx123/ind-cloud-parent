@@ -4,7 +4,7 @@ package com.dfc.ind.service.dataapi.impl;
 import com.dfc.ind.entity.dataapi.DataApiParaInfoEntity;
 import com.dfc.ind.mapper.dataapi.DataApiParaInfoMapper;
 import com.dfc.ind.service.dataapi.IDataApiParaInfoService;
-import com.github.jeffreyning.mybatisplus.service.MppServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +16,6 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-08
  */
 @Service
-public class DataApiParaInfoServiceImpl extends MppServiceImpl<DataApiParaInfoMapper, DataApiParaInfoEntity> implements IDataApiParaInfoService {
+public class DataApiParaInfoServiceImpl extends ServiceImpl<DataApiParaInfoMapper, DataApiParaInfoEntity> implements IDataApiParaInfoService {
 
 }

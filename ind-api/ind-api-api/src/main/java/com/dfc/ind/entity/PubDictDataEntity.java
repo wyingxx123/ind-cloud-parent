@@ -1,12 +1,12 @@
 package com.dfc.ind.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.dfc.ind.common.core.annotation.Excel;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+import io.swagger.annotations.ApiModel;import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -33,16 +33,13 @@ public class PubDictDataEntity implements Serializable {
   
 
     @ApiModelProperty(value = "商户字典类型")
-    @MppMultiId
     @Excel(name = "商户字典类型")
     private String dictType;
 
-    @MppMultiId
     @ApiModelProperty(value = "商户识别号")
     @Excel(name = "商户识别号")
     private Long merchantId;
 
-    @MppMultiId
     @ApiModelProperty(value = "商户字典代码")
     @Excel(name = "商户字典代码")
     private String dictCode;

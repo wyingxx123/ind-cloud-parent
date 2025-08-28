@@ -3,7 +3,7 @@ package com.dfc.ind.service;
 import com.dfc.ind.entity.PubDictDataEntity;
 
 import com.dfc.ind.vo.PubDictDataVo;
-import com.github.jeffreyning.mybatisplus.service.IMppService;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @author huff
  * @since 2023-05-17
  */
-public interface IPubDictDataService extends IMppService<PubDictDataEntity> {
+public interface IPubDictDataService extends IService<PubDictDataEntity> {
     List<PubDictDataVo> getDictDataByType(Long merchantId, String dictType, String dictCode);
 
     String getMaxDictCodeByDictType(String s, Long merchantId);

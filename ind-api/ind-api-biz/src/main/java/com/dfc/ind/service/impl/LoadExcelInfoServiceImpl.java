@@ -5,7 +5,7 @@ import com.dfc.ind.common.core.exception.CustomException;
 import com.dfc.ind.common.core.utils.DateUtils;
 import com.dfc.ind.common.core.utils.StringUtils;
 import com.dfc.ind.common.core.web.domain.JsonResults;
-import com.dfc.ind.common.security.utils.SecurityUtils;
+import com.dfc.ind.utils.SecurityUtils;
 import com.dfc.ind.entity.LoadExcelInfoEntity;
 
 import com.dfc.ind.mapper.LoadExcelInfoMapper;
@@ -13,7 +13,8 @@ import com.dfc.ind.service.ILoadExcelInfoService;
 import com.dfc.ind.service.IPubDictDataService;
 
 import com.dfc.ind.vo.PubDictDataVo;
-import com.github.jeffreyning.mybatisplus.service.MppServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -45,7 +46,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class LoadExcelInfoServiceImpl extends MppServiceImpl<LoadExcelInfoMapper, LoadExcelInfoEntity> implements ILoadExcelInfoService {
+public class LoadExcelInfoServiceImpl extends ServiceImpl<LoadExcelInfoMapper, LoadExcelInfoEntity> implements ILoadExcelInfoService {
 
 
     @Autowired
@@ -65,7 +66,9 @@ public class LoadExcelInfoServiceImpl extends MppServiceImpl<LoadExcelInfoMapper
         String userName = SecurityUtils.getUserName();
         String appId = entity.getAppId();
         entity.setMerchantId(merchantId);
-        LoadExcelInfoEntity infoEntity = this.selectByMultiId(entity);
+        LoadExcelInfoEntity infoEntity = this.getOne(new QueryWrapper<LoadExcelInfoEntity>()
+                .eq("template_no", entity.getTemplateNo())
+                .eq("merchant_id", entity.getMerchantId()));
         if (infoEntity==null){
             throw new CustomException("查询不到模板信息");
         }
@@ -285,7 +288,9 @@ public class LoadExcelInfoServiceImpl extends MppServiceImpl<LoadExcelInfoMapper
     @Transactional(rollbackFor = Exception.class)
     public JsonResults clearDataByTempNo(LoadExcelInfoEntity entity) {
         Long merchantId = SecurityUtils.getLoginUser().getMerchantId();
-        LoadExcelInfoEntity infoEntity = this.selectByMultiId(entity);
+        LoadExcelInfoEntity infoEntity = this.getOne(new QueryWrapper<LoadExcelInfoEntity>()
+                .eq("template_no", entity.getTemplateNo())
+                .eq("merchant_id", entity.getMerchantId()));
         if (infoEntity==null){
             throw new CustomException("查询不到模板信息");
         }

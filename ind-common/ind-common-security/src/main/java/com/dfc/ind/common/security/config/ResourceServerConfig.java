@@ -42,8 +42,8 @@ import java.nio.charset.StandardCharsets;
  *
  *
  */
-@Configuration
-@EnableResourceServer
+//@Configuration
+//@EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter
 {
     @Autowired

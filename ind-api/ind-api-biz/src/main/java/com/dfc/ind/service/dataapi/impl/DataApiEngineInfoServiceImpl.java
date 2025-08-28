@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.dfc.ind.entity.dataapi.DataApiEngineInfoEntity;
 import com.dfc.ind.mapper.dataapi.DataApiEngineInfoMapper;
 import com.dfc.ind.service.dataapi.IDataApiEngineInfoService;
-import com.github.jeffreyning.mybatisplus.service.MppServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
  * @since 2022-09-08
  */
 @Service
-public class DataApiEngineInfoServiceImpl extends MppServiceImpl<DataApiEngineInfoMapper, DataApiEngineInfoEntity> implements IDataApiEngineInfoService {
+public class DataApiEngineInfoServiceImpl extends ServiceImpl<DataApiEngineInfoMapper, DataApiEngineInfoEntity> implements IDataApiEngineInfoService {
 
 
 }

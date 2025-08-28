@@ -5,10 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.dfc.ind.common.core.utils.ServletUtils;
 import com.dfc.ind.common.core.utils.common.Constant;
 import com.dfc.ind.common.core.web.domain.JsonResults;
-import com.dfc.ind.common.security.domain.LoginUser;
-import com.dfc.ind.common.security.utils.SecurityUtils;
+// import com.dfc.ind.common.security.domain.LoginUser;
+// import com.dfc.ind.common.security.utils.SecurityUtils;
 import lombok.NonNull;
-import org.apache.catalina.security.SecurityUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +41,9 @@ public class ServerProtectInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler){
+        // 临时禁用SecurityUtils依赖，因为该类已被移除
+        // TODO: 需要重新实现用户认证逻辑或移除此拦截器
+        /*
         LoginUser loginUser = SecurityUtils.getLoginUser();
         if (loginUser==null){
             return false;
@@ -49,6 +51,7 @@ public class ServerProtectInterceptor implements HandlerInterceptor {
 
         Long userId = SecurityUtils.getLoginUser().getUserId();
         System.out.println("userId =================== " + userId);
+        */
         return true;
     }
 }

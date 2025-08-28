@@ -1,0 +1,160 @@
+spring:
+  rabbitmq:
+    host: 81.70.201.242
+    listener:
+      direct:
+        acknowledge-mode: manual
+    password: msgcenteruser123
+    port: 5672
+    template:
+      retry:
+        enabled: true
+        initial-interval: 10000ms
+        max-interval: 80000ms
+        multiplier: 2
+    username: msgcenteruser
+    virtual-host: /messagecenter
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          enabled: true
+      routes:
+        # 系统模块
+        - id: ind-system
+          uri: lb://ind-system
+          predicates:
+            - Path=/system/**
+          filters:
+            - name: BlackListUrlFilter
+              args:
+                blacklistUrl:
+                  - /user/info/*
+            - StripPrefix=1
+        # 认证中心
+        - id: ind-auth
+          uri: lb://ind-auth
+          predicates:
+            - Path=/auth/**
+          filters:
+            # 验证码处理
+            - ValidateCodeFilter
+            - StripPrefix=1
+        # 定时任务
+        - id: ind-job
+          uri: lb://ind-job
+          predicates:
+            - Path=/schedule/**
+          filters:
+            - StripPrefix=1
+        # 计划模块
+        - id: ind-plan
+          uri: lb://ind-plan
+          predicates:
+            - Path=/plan/**
+          filters:
+            - StripPrefix=1
+        # 数据模块
+        - id: ind-data
+          uri: lb://ind-data
+          predicates:
+            - Path=/data/**
+          filters:
+            - StripPrefix=1
+        # 订单模块
+        - id: ind-order
+          uri: lb://ind-order
+          predicates:
+            - Path=/order/**
+          filters:
+            - StripPrefix=1
+        # 产品模块
+        - id: ind-product
+          uri: lb://ind-product
+          predicates:
+            - Path=/product/**
+          filters:
+            - StripPrefix=1
+        # 工艺模块
+        - id: ind-process
+          uri: lb://ind-process
+          predicates:
+            - Path=/process/**
+          filters:
+            - StripPrefix=1
+        # 工艺模块
+        - id: ind-process
+          uri: lb://ind-process
+          predicates:
+            - Path=/process/**
+          filters:
+            - StripPrefix=1
+        # 审批模块
+        - id: ind-approval
+          uri: lb://ind-approval
+          predicates:
+            - Path=/approval/**
+          filters:
+            - StripPrefix=1
+        # 商品模块
+        - id: ind-goods
+          uri: lb://ind-goods
+          predicates:
+            - Path=/goods/**
+          filters:
+            - StripPrefix=1
+        # 商铺模块
+        - id: ind-shop
+          uri: lb://ind-shop
+          predicates:
+            - Path=/shop/**
+          filters:
+            - StripPrefix=1
+        # 通知模块
+        - id: ind-news
+          uri: lb://ind-news
+          predicates:
+            - Path=/news/**
+          filters:
+            - StripPrefix=1
+        # 消息模块
+        - id: ind-message
+          uri: lb://ind-message
+          predicates:
+            - Path=/message/**
+          filters:
+            - StripPrefix=1
+        # 规则模块
+        - id: ind-rule
+          uri: lb://ind-rule
+          predicates:
+            - Path=/rule/**
+          filters:
+            - StripPrefix=1
+        # 统计模块
+        - id: ind-statistics
+          uri: lb://ind-statistics
+          predicates:
+            - Path=/statistics/**
+          filters:
+            - StripPrefix=1
+        # 动态表单模块
+        - id: ind-table
+          uri: lb://ind-table
+          predicates:
+            - Path=/table/**
+          filters:
+            - StripPrefix=1
+         # api内部模块
+        - id: ind-api
+          uri: lb://ind-api
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1
+management:
+  server:
+    port: -1
+pub:
+  key: XXXX

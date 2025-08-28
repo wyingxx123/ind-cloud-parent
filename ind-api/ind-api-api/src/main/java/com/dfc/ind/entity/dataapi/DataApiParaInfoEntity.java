@@ -6,7 +6,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
-import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import com.dfc.ind.common.core.annotation.Excel;
@@ -34,25 +34,21 @@ public class DataApiParaInfoEntity implements Serializable {
 
     @ApiModelProperty(value = "服务识别码")
     @Excel(name = "服务识别码")
-    @MppMultiId
     private String serviceId;
   
 
     @ApiModelProperty(value = "应用识别码")
     @Excel(name = "应用识别码")
-    @MppMultiId
     private String appId;
   
 
     @ApiModelProperty(value = "参数组编号")
     @Excel(name = "参数组编号")
-    @MppMultiId
     private String paraGroupNo;
   
 
     @ApiModelProperty(value = "参数识别号")
     @Excel(name = "参数识别号")
-    @MppMultiId
     private String paraId;
   
 

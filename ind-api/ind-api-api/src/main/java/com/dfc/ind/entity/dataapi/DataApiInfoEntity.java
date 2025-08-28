@@ -2,7 +2,7 @@ package com.dfc.ind.entity.dataapi;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.dfc.ind.common.core.annotation.Excel;
-import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -31,14 +31,12 @@ public class DataApiInfoEntity implements Serializable {
   
 
     @ApiModelProperty(value = "服务识别码")
-    @MppMultiId
     @Excel(name = "服务识别码")
     private String serviceId;
   
 
     @ApiModelProperty(value = "应用识别码")
     @Excel(name = "应用识别码")
-    @MppMultiId
     private String appId;
   
 

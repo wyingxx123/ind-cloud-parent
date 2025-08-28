@@ -1,7 +1,7 @@
 package com.dfc.ind.mapper;
 
 import com.dfc.ind.entity.LoadExcelInfoEntity;
-import com.github.jeffreyning.mybatisplus.base.MppBaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -11,7 +11,7 @@ import com.github.jeffreyning.mybatisplus.base.MppBaseMapper;
  * @author huff
  * @since 2024-07-22
  */
-public interface LoadExcelInfoMapper extends MppBaseMapper<LoadExcelInfoEntity> {
+public interface LoadExcelInfoMapper extends BaseMapper<LoadExcelInfoEntity> {
 
     void annualBusinessPlanFlash(Long merchantId, String importDate, String templateNo, String appId, String scoreName, String colId, String tableName);
 

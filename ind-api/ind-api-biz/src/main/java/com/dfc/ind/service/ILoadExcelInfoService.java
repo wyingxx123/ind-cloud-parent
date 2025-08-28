@@ -2,7 +2,7 @@ package com.dfc.ind.service;
 
 import com.dfc.ind.common.core.web.domain.JsonResults;
 import com.dfc.ind.entity.LoadExcelInfoEntity;
-import com.github.jeffreyning.mybatisplus.service.IMppService;
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author huff
  * @since 2024-07-22
  */
-public interface ILoadExcelInfoService extends IMppService<LoadExcelInfoEntity> {
+public interface ILoadExcelInfoService extends IService<LoadExcelInfoEntity> {
 
     JsonResults importData(MultipartFile file, LoadExcelInfoEntity entity);
 

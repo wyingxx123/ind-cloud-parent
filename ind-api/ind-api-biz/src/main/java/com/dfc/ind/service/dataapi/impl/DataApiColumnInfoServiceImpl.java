@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.toolkit.SqlParserUtils;
 import com.dfc.ind.common.core.utils.StringUtils;
 import com.dfc.ind.common.core.web.domain.JsonResults;
-import com.dfc.ind.common.security.utils.SecurityUtils;
+import com.dfc.ind.utils.SecurityUtils;
 import com.dfc.ind.entity.dataapi.DataApiColumnInfoEntity;
 import com.dfc.ind.entity.dataapi.DataApiInfoEntity;
 import com.dfc.ind.entity.dataapi.vo.ApiColumnVo;
@@ -16,7 +16,7 @@ import com.dfc.ind.mapper.dataapi.DataApiColumnInfoMapper;
 import com.dfc.ind.service.dataapi.IDataApiColumnInfoService;
 import com.dfc.ind.service.dataapi.IDataApiInfoService;
 import com.dfc.ind.uitls.MyBatisUtil;
-import com.github.jeffreyning.mybatisplus.service.MppServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.parser.SimpleNode;
 import net.sf.jsqlparser.statement.Statement;
@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
  * @since 2024-04-07
  */
 @Service
-public class DataApiColumnInfoServiceImpl extends MppServiceImpl<DataApiColumnInfoMapper, DataApiColumnInfoEntity> implements IDataApiColumnInfoService {
+public class DataApiColumnInfoServiceImpl extends ServiceImpl<DataApiColumnInfoMapper, DataApiColumnInfoEntity> implements IDataApiColumnInfoService {
 
 
 

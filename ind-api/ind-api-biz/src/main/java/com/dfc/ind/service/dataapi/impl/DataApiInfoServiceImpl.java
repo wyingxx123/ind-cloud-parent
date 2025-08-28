@@ -25,7 +25,7 @@ import com.dfc.ind.service.dataapi.IDataApiInfoService;
 import com.dfc.ind.service.dataapi.IDataApiParaInfoService;
 import com.dfc.ind.service.dataapi.IDbAdapterService;
 import com.dfc.ind.uitls.*;
-import com.github.jeffreyning.mybatisplus.service.MppServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.sequoiadb.base.ConfigOptions;
 import com.sequoiadb.datasource.ConnectStrategy;
 import com.sequoiadb.datasource.DatasourceOptions;
@@ -61,7 +61,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Service
 @Slf4j
-public class DataApiInfoServiceImpl extends MppServiceImpl<DataApiInfoMapper, DataApiInfoEntity> implements IDataApiInfoService {
+public class DataApiInfoServiceImpl extends ServiceImpl<DataApiInfoMapper, DataApiInfoEntity> implements IDataApiInfoService {
     @Autowired
     private IDataApiEngineInfoService dataApiEngineInfoService;
 
@@ -207,9 +207,9 @@ public class DataApiInfoServiceImpl extends MppServiceImpl<DataApiInfoMapper, Da
             dataApiEngineInfoEntity.setEngineResource(executeDTO.getSql());
             apiEngineInfoEntities.add(dataApiEngineInfoEntity);
         }
-        dataApiEngineInfoService.saveOrUpdateBatchByMultiId(apiEngineInfoEntities);
-        dataApiParaInfoService.saveOrUpdateBatchByMultiId(apiParaInfoEntities);
-        this.saveOrUpdateBatchByMultiId(apiInfoEntities);
+        dataApiEngineInfoService.saveOrUpdateBatch(apiEngineInfoEntities);
+        dataApiParaInfoService.saveOrUpdateBatch(apiParaInfoEntities);
+        this.saveOrUpdateBatch(apiInfoEntities);
         return JsonResults.success("发布成功");
     }
 

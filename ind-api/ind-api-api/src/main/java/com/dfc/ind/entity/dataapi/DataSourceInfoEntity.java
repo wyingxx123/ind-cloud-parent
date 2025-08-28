@@ -6,7 +6,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
-import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import com.dfc.ind.common.core.annotation.Excel;
@@ -34,13 +34,11 @@ public class DataSourceInfoEntity implements Serializable {
 
     @ApiModelProperty(value = "数据源识别码")
     @Excel(name = "数据源识别码")
-    @MppMultiId
     private String sourceId;
   
 
     @ApiModelProperty(value = "应用识别码")
     @Excel(name = "应用识别码")
-    @MppMultiId
     private String appId;
   
 

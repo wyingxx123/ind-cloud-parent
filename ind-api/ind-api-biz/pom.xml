@@ -23,23 +23,50 @@
             <groupId>com.dfc</groupId>
             <artifactId>ind-api-api</artifactId>
             <version>${ind-common.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.security</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-security</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-security</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- ind Common Security -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.dfc</groupId>
             <artifactId>ind-common-security</artifactId>
             <version>${ind-common.version}</version>
-        </dependency>
+        </dependency>-->
   <!--      <dependency>
             <groupId>com.dfc</groupId>
             <artifactId>ind-common-core</artifactId>
             <version>${ind-common.version}</version>
         </dependency>-->
+        <!-- ind System API -->
+        <dependency>
+            <groupId>com.dfc</groupId>
+            <artifactId>ind-system-api</artifactId>
+            <version>${ind-common.version}</version>
+        </dependency>
+
         <!-- ind Common Log -->
         <dependency>
             <groupId>com.dfc</groupId>
             <artifactId>ind-common-log</artifactId>
             <version>${ind-common.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.dfc</groupId>
+                    <artifactId>ind-common-security</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- ind Common Swagger -->
@@ -57,6 +84,12 @@
             <groupId>com.dfc</groupId>
             <artifactId>ind-server-intercepter</artifactId>
             <version>${ind-common.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.dfc</groupId>
+                    <artifactId>ind-common-security</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Mysql -->
         <dependency>
@@ -105,11 +138,7 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.github.jeffreyning</groupId>
-            <artifactId>mybatisplus-plus</artifactId>
-            <version>1.5.1-RELEASE</version>
-        </dependency>
+            
         <dependency>
             <groupId>com.sequoiadb</groupId>
             <artifactId>sequoiadb-driver</artifactId>

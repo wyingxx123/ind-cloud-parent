@@ -44,7 +44,7 @@
         <pagehelper.version>5.1.11</pagehelper.version>
         <easyexcel.version>3.3.4</easyexcel.version>
         <barcode4j.version>2.0</barcode4j.version>
-        <mybatisplus-plus.version>1.5.1-RELEASE</mybatisplus-plus.version>
+
         <java-jwt.version>4.0.0</java-jwt.version>
         <poi.version>4.1.2</poi.version>
         <mybatis.version>3.5.6</mybatis.version>
@@ -106,11 +106,7 @@
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.github.jeffreyning</groupId>
-                <artifactId>mybatisplus-plus</artifactId>
-                <version>${mybatisplus-plus.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper</artifactId>

@@ -43,7 +43,7 @@ public class LoadExcelInfoController extends BaseController {
     @ApiOperation(value = "新增")
     @Log(title = "导入模板信息-新增", businessType = BusinessType.INSERT)
     public JsonResults add(@RequestBody LoadExcelInfoEntity entity) {
-        service.saveOrUpdateByMultiId(entity);
+        service.saveOrUpdate(entity);
         return JsonResults.success(entity);
     }
 
@@ -56,7 +56,10 @@ public class LoadExcelInfoController extends BaseController {
     @ApiOperation(value = "删除")
     @Log(title = "导入模板信息-删除", businessType = BusinessType.DELETE)
     public JsonResults del(LoadExcelInfoEntity entity) {
-        return toResult(service.deleteByMultiId(entity));
+        QueryWrapper<LoadExcelInfoEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("merchant_id", entity.getMerchantId())
+                   .eq("template_no", entity.getTemplateNo());
+        return toResult(service.remove(queryWrapper));
     }
 
     /**

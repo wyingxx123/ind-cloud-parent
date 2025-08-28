@@ -4,7 +4,7 @@
     <springProperty name="APP_NAME" scope="context" source="spring.application.name"/>
     <springProperty name="ServerIP" scope="context" source="spring.cloud.client.ip-address" defaultValue="0.0.0.0"/>
     <springProperty name="ServerPort" scope="context" source="server.port" defaultValue="0000"/>
-    <springProperty name="log.path" scope="context" source="logging.file" defaultValue="/home/ind-cloud-new/logs/${APP_NAME}"/>
+    <springProperty name="log.path" scope="context" source="logging.file" defaultValue="./home/ind-cloud-new/logs/${APP_NAME}"/>
     <property name="log.maxHistory" value="15"/>
     <property name="log.colorPattern" value="%magenta(%d{yyyy-MM-dd HH:mm:ss}) %highlight(%-5level) %boldCyan([${APP_NAME}:${ServerIP}:${ServerPort},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]) %yellow(%thread) %green(%logger) %msg%n"/>
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5level [${APP_NAME}:${ServerIP}:${ServerPort},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}] %thread %logger %msg%n"/>

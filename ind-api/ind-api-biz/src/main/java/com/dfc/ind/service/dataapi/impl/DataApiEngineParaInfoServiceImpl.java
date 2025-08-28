@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dfc.ind.entity.dataapi.DataApiEngineParaInfoEntity;
 import com.dfc.ind.mapper.dataapi.DataApiEngineParaInfoMapper;
 import com.dfc.ind.service.dataapi.IDataApiEngineParaInfoService;
-import com.github.jeffreyning.mybatisplus.service.MppServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2022-09-08
  */
 @Service
-public class DataApiEngineParaInfoServiceImpl extends MppServiceImpl<DataApiEngineParaInfoMapper, DataApiEngineParaInfoEntity> implements IDataApiEngineParaInfoService {
+public class DataApiEngineParaInfoServiceImpl extends ServiceImpl<DataApiEngineParaInfoMapper, DataApiEngineParaInfoEntity> implements IDataApiEngineParaInfoService {
 
     @Override
     public List<DataApiEngineParaInfoEntity> getByEngineNo(String engineNO) {

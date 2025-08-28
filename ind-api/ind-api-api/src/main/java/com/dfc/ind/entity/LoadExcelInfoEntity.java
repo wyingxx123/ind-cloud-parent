@@ -1,12 +1,13 @@
 package com.dfc.ind.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.dfc.ind.common.core.annotation.Excel;
 
 import com.dfc.ind.vo.PubDictDataVo;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,13 +40,12 @@ public class LoadExcelInfoEntity implements Serializable {
     @ApiModelProperty(value = "模板编号")
     @Excel(name = "模板编号")
     @NotNull(message ="模板编号不能为空" )
-    @MppMultiId
+    @TableId
     private String templateNo;
   
 
     @ApiModelProperty(value = "商户识别号")
     @Excel(name = "商户识别号")
-    @MppMultiId
     private Long merchantId;
   
 

@@ -8,7 +8,7 @@ import com.dfc.ind.common.core.web.controller.BaseController;
 import com.dfc.ind.common.core.web.domain.JsonResults;
 import com.dfc.ind.common.log.annotation.Log;
 import com.dfc.ind.common.log.enums.BusinessType;
-import com.dfc.ind.common.security.utils.SecurityUtils;
+import com.dfc.ind.utils.SecurityUtils;
 import com.dfc.ind.entity.PubDictTypeEntity;
 import com.dfc.ind.service.IPubDictTypeService;
 import io.swagger.annotations.Api;

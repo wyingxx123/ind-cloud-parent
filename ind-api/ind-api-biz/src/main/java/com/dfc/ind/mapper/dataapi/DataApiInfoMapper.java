@@ -5,7 +5,7 @@ import com.dfc.ind.entity.dataapi.param.LoadApiDataToRedisParam;
 import com.dfc.ind.entity.dataapi.vo.ApiInfoCatchDTO;
 import com.dfc.ind.entity.dataapi.vo.FiledTypeVo;
 import com.dfc.ind.entity.dataapi.vo.MetaDataVo;
-import com.github.jeffreyning.mybatisplus.base.MppBaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @author huff
  * @since 2022-09-08
  */
-public interface DataApiInfoMapper extends MppBaseMapper<DataApiInfoEntity> {
+public interface DataApiInfoMapper extends BaseMapper<DataApiInfoEntity> {
     /**
      * 获取表元数据 字段名,是否主键,字段顺序
      * param

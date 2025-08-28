@@ -1,11 +1,12 @@
 package com.dfc.ind.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dfc.ind.common.core.utils.StringUtils;
 import com.dfc.ind.common.core.utils.poi.ExcelUtil;
 import com.dfc.ind.common.core.web.controller.BaseController;
 import com.dfc.ind.common.core.web.domain.JsonResults;
-import com.dfc.ind.common.security.utils.SecurityUtils;
+import com.dfc.ind.utils.SecurityUtils;
 import com.dfc.ind.entity.PubDictDataEntity;
 
 import com.dfc.ind.service.IPubDictDataService;
@@ -57,7 +58,11 @@ public class PubDictDataController extends BaseController {
     @DeleteMapping("/delData")
     @ApiOperation(value = "删除")
     public JsonResults del( PubDictDataEntity entity) {
-        return toResult(service.deleteByMultiId(entity));
+        QueryWrapper<PubDictDataEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("dict_type", entity.getDictType())
+                   .eq("merchant_id", entity.getMerchantId())
+                   .eq("dict_code", entity.getDictCode());
+        return toResult(service.remove(queryWrapper));
     }
 
     /**
@@ -68,7 +73,7 @@ public class PubDictDataController extends BaseController {
     @PutMapping
     @ApiOperation(value = "修改")
     public JsonResults edit(@RequestBody PubDictDataEntity entity) {
-        service.updateByMultiId(entity);
+        service.saveOrUpdate(entity);
         return JsonResults.success();
     }
 
@@ -85,14 +90,14 @@ public class PubDictDataController extends BaseController {
             entity.setOpDate(new Date());
             entity.setOpTime(new Date());
         }
-        service.saveOrUpdateBatchByMultiId(list);
+        service.saveOrUpdateBatch(list);
         return JsonResults.success();
     }
 
     @PostMapping("/saveOrUpdateList")
     @ApiOperation(value = "修改")
     public JsonResults saveOrUpdateList(@RequestBody List<PubDictDataEntity> list) {
-        service.saveOrUpdateBatchByMultiId(list);
+        service.saveOrUpdateBatch(list);
         return JsonResults.success();
     }
 

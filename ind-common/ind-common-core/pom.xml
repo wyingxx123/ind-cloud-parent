@@ -89,10 +89,7 @@
         </dependency>
     
         <!-- MyBatis增强 - 移除版本号，使用父级管理 -->
-        <dependency>
-            <groupId>com.github.jeffreyning</groupId>
-            <artifactId>mybatisplus-plus</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>

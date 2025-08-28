@@ -6,7 +6,7 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 
-import com.github.jeffreyning.mybatisplus.anno.MppMultiId;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import com.dfc.ind.common.core.annotation.Excel;
@@ -34,13 +34,11 @@ public class DataApiEngineInfoEntity implements Serializable {
 
     @ApiModelProperty(value = "引擎编号")
     @Excel(name = "引擎编号")
-    @MppMultiId
     private String engineNo;
 
 
     @ApiModelProperty(value = "引擎编号")
     @Excel(name = "引擎编号")
-    @MppMultiId
     private String appId;
 
     @ApiModelProperty(value = "引擎类型")

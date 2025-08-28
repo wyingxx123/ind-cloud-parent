@@ -3,7 +3,7 @@ package com.dfc.ind.mapper;
 import com.dfc.ind.entity.PubDictDataEntity;
 
 import com.dfc.ind.vo.PubDictDataVo;
-import com.github.jeffreyning.mybatisplus.base.MppBaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @author huff
  * @since 2023-05-17
  */
-public interface PubDictDataMapper extends MppBaseMapper<PubDictDataEntity> {
+public interface PubDictDataMapper extends BaseMapper<PubDictDataEntity> {
 
     List<PubDictDataVo> getDictDataByType(Long merchantId, String dictType, String dictCode);
 

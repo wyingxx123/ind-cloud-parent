@@ -1,0 +1,121 @@
+spring:
+  ##boot:
+  ##  admin:
+  ##    client:
+  ##      url: http://192.168.4.49:8888
+  servlet:    # 此版本的节点为servlet，不是http 注意一下
+    multipart:
+    # 启用上传处理，默认是true
+      enabled: true 
+      # 当上传文件达到1MB的时候进行磁盘写入
+      file-size-threshold: 1MB   
+      # 设置最大的请求文件的大小
+      max-request-size: 30MB 
+      # 设置单个文件的最大长度    
+      max-file-size: 30MB    
+      
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+# feign 配置
+feign:
+  sentinel:
+    enabled: true
+  okhttp:
+    enabled: true
+  httpclient:
+    enabled: false
+  client:
+    config:
+      default:
+        connectTimeout: 60000
+        readTimeout: 60000
+  compression:
+    request:
+      enabled: true
+      useGzipDecoder: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+    response:
+      enabled: false
+      useGzipDecoder: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+server:
+  compression:
+    enabled: true # 是否启用
+    min-response-size: 2048 # 启用压缩最小值 kb
+    mime-types: text/xml,application/xml,application/json #生效的Content-Type
+# 关闭监控
+management:
+  server:
+    port: -1
+
+#mybatis-plus配置
+mybatis-plus:
+  # 搜索指定包别名
+  typeAliasesPackage: com.apic.ind.entity,com.apic.ind.*.entity
+  mapper-locations[0]: classpath:mapper/*.xml
+  mapper-locations[1]: classpath*:mapper/*/*.xml
+
+  global-config:
+    db-config:
+      select-strategy: not_empty 
+
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: my_test_tx_group
+  config:
+    type: nacos
+    nacos:
+      namespace:  d1311674-ebe4-402d-a52f-ef576d95d38f
+      serverAddr: ${ind.nacos.url}
+      group: SEATA_GROUP
+      userName: ${ind.nacos.username}
+      password: ${ind.nacos.password}
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      serverAddr: ${ind.nacos.url}
+      group: SEATA_GROUP
+      namespace:  d1311674-ebe4-402d-a52f-ef576d95d38f
+      userName: ${ind.nacos.username}
+      password: ${ind.nacos.password}
+
+# 认证配置
+security:
+  oauth2:
+    client:
+      client-id: admin
+      client-secret: 123456
+      scope: server
+    resource:
+      loadBalanced: true
+      token-info-uri: http://ind-auth/oauth/check_token
+    ignore:
+      urls:
+        - /v2/api-docs
+        - /actuator/**
+        - /user/info/*
+        - /operlog
+        - /logininfor
+        - /user/test
+        - /rel/order/all
+        - /warn/**
+        - /agrWork/all
+        - /plaPlan/listByPlanNos
+        - /plaPurchase/listByPlanNos
+        - /plaPlan/all
+        - /plaPurchase/all
+        - /safety/all
+        - /productInfo/getByProduct
+        - /login/in
+        - /websocket/**
+        - /testReport/**
+        - /reportBigScreen/**
+        - /appDownloadInfo/list         
+      

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dfc.ind.entity.dataapi.DataApiColumnInfoEntity;
 import com.dfc.ind.entity.dataapi.vo.ApiColumnVo;
 import com.dfc.ind.entity.dataapi.vo.ApiSqlInfoVo;
-import com.github.jeffreyning.mybatisplus.base.MppBaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.Set;
  * @author huff
  * @since 2024-04-07
  */
-public interface DataApiColumnInfoMapper extends MppBaseMapper<DataApiColumnInfoEntity> {
+public interface DataApiColumnInfoMapper extends BaseMapper<DataApiColumnInfoEntity> {
 
     List<ApiSqlInfoVo> getApiEngineInfo(String appId);
 
