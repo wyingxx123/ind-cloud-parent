@@ -1,0 +1,7 @@
+sms:
+  tencent:
+    secretId: YOUR_TENCENT_SECRET_ID
+    secretKey: YOUR_TENCENT_SECRET_KEY
+    sdkAppId: YOUR_SDK_APP_ID
+    templateId: YOUR_TEMPLATE_ID
+    signName: YOUR_SIGN_NAME
